@@ -1,0 +1,29 @@
+Hartley oscillator using FET
+
+.MODEL NFET NMOS (LEVEL=2 L=1u W=1u VTO=-1.44 KP=8.64E-6
++ NSUB=1E17 TOX=20n)
+
+Vcc vin 0 dc 9
+R1 vin a 100k
+R2 a 0 5k
+R3 vin b 1k
+R4 c 0 10k
+
+M1 b a c 0 NFET
+
+C1 a d 100pf
+C2 d out 10pf
+C3 c 0 100pf
+C4 b out 100pf
+
+L1 d 0 10mh
+L2 0 out 20mh
+
+.control
+tran 0.1u 250u
+run
+set color0 = white
+set control = black
+plot V(out)
+.endc
+.end

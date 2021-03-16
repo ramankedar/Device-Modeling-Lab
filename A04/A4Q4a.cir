@@ -1,0 +1,23 @@
+Inverting Summer
+
+.INCLUDE UA741.MOD
+XU1 0 2 7 4 6 UA741
+
+V1 1 0 SIN(0 5 1kHz)
+V2 3 0 SIN(0 5 1kHz)
+V7 7 0 12V
+V4 4 0 -12V
+R1 1 2 1K
+R2 3 2 1K
+R3 2 6 10K
+
+.tran 1us 0.01s
+.control
+run
+
+set color0 = white
+set color1 = black
+set Xbrushwidth = 2
+plot V(1)*1.5+10 V(3)*1.5+5 V(6)/2-10
+.endc
+.end

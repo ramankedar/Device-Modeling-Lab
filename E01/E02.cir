@@ -1,0 +1,18 @@
+Question No. 2
+
+Vin 0 1 pulse(-6 6 1000u 0 0 1000u 2000u)
+D 3 2 D
+C 1 2 1u
+V2 3 0 -9
+R 2 0 1000k
+
+.model D D
+.control
+tran 0.1ms 30ms
+set color0 = white
+set color1 = black
+set color2 = blue
+plot v(1) v(2)
+
+.endc
+.end 

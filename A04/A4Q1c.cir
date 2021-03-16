@@ -1,0 +1,25 @@
+Differentiator using op-amp with triangular wave as input
+
+.INCLUDE LF356.MOD
+XU1 3 2 7 4 6 LF356/NS
+
+VCLOCK 1 0 PWL(0 0 1NS 1 2NS 0 3NS -1 4NS 0 5NS 1 6NS 0 7NS -1 8NS 0 9NS 1 10NS 0)
+*VCLOCK 1 0 PWL(0 0 0.5 1 1 0)
+Vp 7 0 5V
+Vm 4 0 -5V
+Rc 1 5 160
+C 5 2 1uF
+Rf 2 6 32
+Cf 2 6 50uF
+Rout 6 0 1
+
+.control
+run
+tran 1ns 10ns
+set color0 = white
+set color1 = black
+set color2 = blue
+plot V(1) v(6)*100
+
+.endc
+.end

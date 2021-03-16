@@ -1,0 +1,24 @@
+Differentiator using op-amp with sine wave as input
+
+.INCLUDE UA741.MOD
+XU1 3 2 7 4 6 UA741
+
+V1 1 0 SIN(0 100 50)
+Vp 7 0 5V
+Vm 4 0 -5V
+Rc 1 5 160
+C 5 2 1uF
+Rf 2 6 32
+Cf 2 6 50uF
+Rout 6 0 1
+
+.control
+run
+tran 1us 0.2s
+set color0 = white
+set color1 = black
+set color2 = blue
+plot V(1) V(6)*2k+300
+
+.endc
+.end

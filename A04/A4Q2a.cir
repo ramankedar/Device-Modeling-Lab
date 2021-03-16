@@ -1,0 +1,23 @@
+Integrator using op-amp with sine wave as input
+
+.INCLUDE UA741.MOD
+XU1 0 2 7 4 6 UA741
+ 
+Vin 1 0 SIN(0 1 1kHz)
+r1 1 2 50k
+r2 2 6 100k
+c1 2 6 10nF
+r3 6 0 10k
+v1 7 0 12
+v2 4 0 -12
+
+.control
+tran 1ms 7ms 
+run
+set color0 = white
+set color1 = black
+set color2 = blue
+PLOT V(1) (V(6)*3)+3
+
+.endc
+.end

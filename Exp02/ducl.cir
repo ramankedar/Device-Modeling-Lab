@@ -1,0 +1,19 @@
+Dual Clipper
+
+V1 n0 0 sin(0 25 500Hz)
+R1 n0 n1 1k
+D1 n1 n2 D
+V2 n2 0 dc 5
+D2 n3 n1 D
+V3 0 n3 dc 3
+
+.model D D
+
+.CONTROL
+TRAN 0.01ms 15ms
+set color0 = white
+set color1 = black
+PLOT V(n0) V(n1)
+
+.ENDC
+.END

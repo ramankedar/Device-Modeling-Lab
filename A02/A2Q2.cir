@@ -1,0 +1,20 @@
+Voltage Triple Circuit
+V1 1 0 sin(0 10 0.5k 0 0 0)
+C1 1 2 4u
+D1 2 0 D
+C2 2 3 4u
+D2 4 2 D
+C3 0 4 4u
+D3 3 4 D
+
+.model D D
+
+.tran 1us 40ms
+.control
+run
+set color0 = white
+set color1 = black
+plot V(1) V(1)-V(3)
+
+.ENDC
+.END

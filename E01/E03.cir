@@ -1,0 +1,24 @@
+Question No. 3
+
+.include UA741.MOD
+XU1 3 2 7 4 6 UA741
+
+VCLOCK 1 0 PWL(0 0 1uS 1 2uS 0 3uS -1 4uS 0 5uS 1 6uS 0 7uS -1 8uS 0 9uS 1 10uS 0)
+V1 7 0 12V
+V2 4 0 -12V
+R 1 2 600K
+C 2 6 0.1nF
+Rf 2 6 160K
+Rout 6 0 10
+Rgrnd 3 0 10
+
+.tran 1us 10us
+.control
+run
+
+set color0 = white
+set color1 = black
+set Xbrushwidth = 2
+plot  v(1) v(6)*100+2
+.endc
+.end

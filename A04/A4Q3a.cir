@@ -1,0 +1,27 @@
+Active high pass filter
+
+.include UA741.MOD
+XU1 3 2 7 4 6 UA741
+
+Vin 1 0 AC 1 DC 0
+V1 7 0 12V
+V2 4 0 -12V
+C1 1 5 1nF
+C2 5 3 1nF
+R1 5 6 10
+R2 3 0 10
+R3 2 0 2m
+Rf 2 6 2m
+
+.ac dec 10 1 100Meg
+.control
+run
+
+set color0 = white
+set color1 = black
+set color2 = blue
+set Xbrushwidth = 2
+PLOT v(6)
+
+.endc
+.end

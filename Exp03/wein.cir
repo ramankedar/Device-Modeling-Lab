@@ -1,0 +1,36 @@
+Wein Bridge oscillator using BJT
+
+.MODEL QBC547BP NPN(IS=1.8E-14 BF=400 NF=0.9955 VAF=80 
++ IKF=0.14 ISE=5E-14 NE=1.46 BR=35.5 NR=1.005 VAR=12.5 
++ IKR=0.03 ISC=1.72E-13 NC=1.27 RB=0.56 RE=0.6 RC=0.25 
++ CJE=1.3E-11 TF=6.4E-10 CJC=4E-12 VJC=0.54 TR=5.072E-8 )
+
+Vcc vin 0 dc 12V
+R1 vin 1 1k
+R2 vin 2 2k
+R3 3 0 250
+R4 vin 4 1k
+R5 2 0 1k
+R6 vin 5 2k
+R7 6 0 1k
+R9 1 6 10k
+R10 5 0 1k
+R11 8 1 5k
+R12 7 0 5k
+
+Q1 1 2 3 QBC547BP
+Q2 4 5 3 QBC547BP
+
+C1 5 7 1uf
+C2 2 6 1uf
+C3 7 8 100nf
+C4 7 0 100nf
+
+.control
+tran 0.1m 20m
+run
+set color0 = white
+set color1 = black
+plot V(1)
+.endc
+.end

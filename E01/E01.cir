@@ -1,0 +1,16 @@
+Question No. 1
+
+V1 0 1 sin(0 6 50)
+D1 2 1 Diode
+R1 2 3 100k
+V2 3 0 3
+.model Diode D
+
+.CONTROL
+TRAN 0.01ms 50ms
+set color0 = white
+set color1 = black
+PLOT V(1) V(2)
+
+.ENDC 
+.END

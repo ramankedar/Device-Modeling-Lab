@@ -1,0 +1,25 @@
+Integrator using op-amp with triangular wave as input
+
+.INCLUDE UA741.MOD
+XU1 0 2 7 4 6 UA741
+ 
+*Vin 1 0 PULSE(0 2 0 1 1 0 1)
+VCLOCK 1 0 PWL(0 0 1NS 1 2NS 0 3NS -1 4NS 0 5NS 1 6NS 0 7NS -1 8NS 0 9NS 1 10NS 0)
+r1 1 2 75k
+r2 2 6 270k
+c1 2 6 10nF
+rl 6 0 10k
+v1 7 0 12
+v2 4 0 -12
+
+.control
+tran 1ns 10ns
+run
+*set color0 = white
+*set color1 = black
+*set color2 = blue
+*set color3 = red
+plot v(1) v(6)*200
+
+.endc
+.end

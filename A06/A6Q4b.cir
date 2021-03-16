@@ -1,0 +1,23 @@
+Common gate amplifier
+
+Vin 1 0 AC 1 DC 0
+C1 1 2 0.1uF
+Rs 2 0 1Meg
+M1 2 0 3 3 nfet
+Rd 3 4 10K
+Vdd 4 0 15V
+C2 5 3 1uF
+R3 5 0 1
+.model nfet PMOS
+
+.ac dec 10 1 10Meg
+.control
+run
+
+set color0 = white
+set color1 = black
+set color2 = red
+set Xbrushwidth = 2
+plot v(5)
+.endc
+.end

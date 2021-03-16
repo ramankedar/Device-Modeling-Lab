@@ -1,0 +1,25 @@
+Common Drain Amplifier using JFET
+
+v1 1 0 dc=0 ac=1
+c1 1 2 10u
+v2 3 0 15
+r2 4 0 10k
+c2 4 5 10u
+rL 5 0 10K
+
+J1 3 2 4 NJF
+
+.model NJF NJF
+.ac dec 100 1 50e16
+.control
+run
+set color0=white
+set color1=black
+set color2=red
+set color3=blue
+set color4=green
+set Xbrushwidth=2
+plot db(v(5))
+
+.endc
+.end

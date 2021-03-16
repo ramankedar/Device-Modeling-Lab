@@ -1,0 +1,22 @@
+Active Low-pass filter
+
+.include UA741.MOD
+XU1 3 2 7 4 6 UA741
+
+Vin 1 0 ac 2V dc 0V
+R1 1 IN 50
+R2 IN OUT 50
+RL OUT 0 100
+C1 OUT 0 3.18u
+
+.control
+run
+AC OCT 101 10 10K
+set color0 = white
+set color1 = black
+set color2 = blue
+set Xbrushwidth = 2
+PLOT db(OUT)
+
+.endc
+.end

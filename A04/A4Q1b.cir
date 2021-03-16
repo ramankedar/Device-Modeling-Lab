@@ -1,0 +1,24 @@
+Differentiator using op-amp with square wave as input
+
+.INCLUDE UA741.MOD
+XU1 3 2 7 4 6 UA741
+
+V n0 0 pulse(-1 1 1us 0ns 0ns 5ms 10ms)
+R n0 1 150
+C 1 2 0.1uF
+Vg 3 0 0
+Rf 2 6 1.5k
+Cf 2 6 0.1uF
+Vp 7 0 15V
+Vm 4 0 -15V
+
+.control
+run
+tran 1us 50ms
+set color0 = white
+set color1 = black
+set color2 = blue
+plot V(6)+5 V(n0)
+
+.endc
+.end

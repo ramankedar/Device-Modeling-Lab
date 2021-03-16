@@ -1,0 +1,30 @@
+Basic phase shift RC oscillator using NPN transistor
+
+.model BC546B npn ( IS=7.59E-15 VAF=73.4 BF=480 IKF=0.0962 NE=1.2665
++ ISE=3.278E-15 IKR=0.03 ISC=2.00E-13 NC=1.2 NR=1 BR=5 RC=0.25 CJC=6.33E-12
++ FC=0.5 MJC=0.33 VJC=0.65 CJE=1.25E-11 MJE=0.55 VJE=0.65 TF=4.26E-10
++ ITF=0.6 VTF=3 XTF=20 RB=100 IRB=0.0001 RBM=10 RE=0.5 TR=1.50E-07)
+
+Vcc vin 0 dc 12
+R7 vin 1 1k
+C5 1 out 10nF
+R6 vin 2 1k
+Q1 1 2 3 BC546B 
+R4 3 0 1k
+C4 3 0 10nF
+C1 1 4 100pF
+C2 4 5 100pF
+C3 5 2 100pF
+R1 4 0 1k
+R2 5 0 1k
+R3 2 0 1k
+RL out 0 1k
+
+.CONTROL
+TRAN 0.1u 50u
+set color0 = white
+set color1 = black
+PLOT V(out)
+
+.ENDC
+.END

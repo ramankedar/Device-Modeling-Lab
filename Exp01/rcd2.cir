@@ -1,0 +1,13 @@
+A Half wave rectifier
+V1 n0 0 SIN(0 10 1kHz)
+D1 n0 n1 D
+R1 n1 0 1k
+.model D D
+.CONTROL 
+TRAN 0.01ms 10ms
+set color0 = white
+set color1 = black 
+PLOT V(n0) V(n1)
+PLOT (V(n0)*V(n1))/1k
+.ENDC
+.END

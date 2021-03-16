@@ -1,0 +1,16 @@
+Clipper Circuit
+
+V1 0 n1 sin(0 1 50)
+D1 n2 n1 Diode
+R1 n2 0 5k
+
+.model Diode D
+
+.CONTROL
+TRAN 0.01ms 70ms
+set color0 = white
+set color1 = black
+PLOT V(n1) V(n2)
+
+.ENDC 
+.END

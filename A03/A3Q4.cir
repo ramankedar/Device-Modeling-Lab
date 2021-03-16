@@ -1,0 +1,33 @@
+Wein Bridge oscillator using fet
+
+Vcc vin 0 dc 12V
+R1 vin 1 1k
+R2 vin 2 2k
+R3 3 0 250
+R4 vin 4 1k
+R5 2 0 1k
+R6 vin 5 2k
+R7 6 0 1k
+R9 1 6 10k
+R10 5 0 1k
+R11 8 1 5k
+R12 7 0 5k
+
+M1 1 2 3 0 fet
+M2 4 5 3 0 fet
+
+C1 5 7 1uf
+C2 2 6 1uf
+C3 7 8 100nf
+C4 7 0 100nf
+
+.model fet NMOS
+.tran 0.1us 500us 480us
+.control
+run
+set color0 = white
+set color1 = black
+set Xbrushwidth = 2
+plot v(7)
+.endc
+.end

@@ -1,0 +1,24 @@
+Differentiator using op-amp
+
+.INCLUDE UA741.MOD
+XU1 3 2 7 4 6 UA741
+
+Vin n0 0 SIN(0 10 1kHz)
+Rs  n0 1 1kHz
+C 1 2 100uF
+Vg 3 0 0
+Rf 2 6 1kHz
+Cf 2 6 100uF
+Vp 7 0 5
+Vm 4 0 -5
+Rl 6 0 1kHz
+
+.control
+tran 0.1us 5ms
+run
+set color0 = white
+set color1 = black
+plot V(n0) V(6)
+
+.endc
+.end

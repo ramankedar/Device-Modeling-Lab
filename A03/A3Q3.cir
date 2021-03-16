@@ -1,0 +1,29 @@
+Colpitt oscillator using FET
+
+.MODEL NFET NMOS (LEVEL=2 L=1u W=1u VTO=-1.44 KP=8.64E-6
++ NSUB=1E17 TOX=20n)
+
+Vcc 2 0 dc 9V
+R1 2 1 100k
+R2 1 0 5k
+R3 2 3 1k
+R4 6 0 10k
+
+M1 3 1 6 0 NFET
+
+C3 5 1 100pf
+c1 5 0 0.01uf
+C2 0 4 0.01uf
+C4 6 0 100nf
+C5 3 4 100pf
+
+L1 5 4 10mh
+
+.control
+tran 0.1us 500u 200u UIC
+run
+set color0 = white
+set control = black
+plot V(4)
+.endc
+.end

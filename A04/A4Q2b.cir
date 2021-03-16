@@ -1,0 +1,24 @@
+Integrator using op-amp with square wave as input
+
+.INCLUDE UA741.MOD
+XU1 0 2 7 4 6 UA741
+ 
+vin 1 0 PULSE(0 5 0 0 0 5m 10m)
+r1 1 2 75k
+r2 2 6 270k
+c1 2 6 10nF
+rl 6 0 10k
+v1 7 0 12
+v2 4 0 -12
+
+.control
+tran 1us 50ms
+run
+set color0 = white
+set color1 = black
+set color2 = blue
+set color3 = red
+plot v(1) v(6)
+
+.endc
+.end

@@ -1,0 +1,31 @@
+RC phase Oscillator using FET
+
+.MODEL NFET NMOS (LEVEL=2 L=1u W=1u VTO=-1.44 KP=8.64E-6
++ NSUB=1E17 TOX=20n)
+
+Vcc vin 0 dc 12
+R7 vin 1 1k
+C5 1 out 10nF
+R6 vin 2 1k
+M1 1 2 3 0 NFET 
+R4 3 0 1k
+C4 3 0 10nF
+C1 1 4 100pF
+C2 4 5 100pF
+C3 5 2 100pF
+R1 4 0 1k
+R2 5 0 1k
+R3 2 0 1k
+RL out 0 1k
+
+.tran 100us 5ms 0.1ms
+.control
+run
+
+set color0 = white
+set color1 = black
+set Xbrushwidth = 2
+plot V(out)
+
+.ENDC
+.END
