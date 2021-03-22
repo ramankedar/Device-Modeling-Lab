@@ -1,0 +1,36 @@
+Full Adder
+.include Nand2.txt
+VA n0 0 PULSE(0 5v 0 0 0 15ms 30ms)
+VB n1 0 PULSE(0 5v 0 0 0 35ms 70ms)
+VC nc 0 PULSE(0 5v 0 0 0 50ms 100ms)
+* half adder (VA,VB)
+XU1 n0 n1 n2 Nand2
+XU2 n0 n2 n3 Nand2
+XU3 n1 n2 n4 Nand2
+XU4 n3 n4 sum Nand2
+XU5 n0 n1 vout Nand2
+XU6 vout vout carry1 Nand2
+* n0 = nc n1 = sum
+* n2 = n5 n3 = n6 n4 = n7
+XU7 nc sum n5 Nand2
+XU8 nc n5 n6 Nand2
+XU9 sum n5 n7 Nand2
+XU10 n6 n7 sum2 Nand2
+XU11 nc sum vout1 Nand2
+XU12 vout1 vout1 carry2 Nand2
+* OR of carry1 and carry2
+XU13 carry1 carry1 n8 Nand2
+XU14 carry2 carry2 n9 Nand2
+XU15 n8 n9 carry Nand2
+.CONTROL
+set color0 = white
+set color1 = black
+set color2 = red
+set color3 = blue
+set color4 = green
+set xbrushwidth = 7
+TRAN 0.01ms 100ms
+PLOT V(n0) V(n1) + 6 V(nc) + 11 V(sum2) +16 V(carry) + 21
+.ENDC
+.END
+

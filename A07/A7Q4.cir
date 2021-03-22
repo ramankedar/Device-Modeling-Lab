@@ -1,0 +1,35 @@
+Full Subtractor
+
+.include Nand2.txt
+VA n0 0 PULSE(0 5v 0 0 0 15ms 30ms)
+VB n1 0 PULSE(0 5v 0 0 0 35ms 70ms)
+VC nc 0 PULSE(0 5v 0 0 0 50ms 100ms)
+* half adder (VA,VB)
+XU1 n0 n1 n2 Nand2
+XU2 n0 n2 n3 Nand2
+XU3 n1 n2 n4 Nand2
+XU4 n3 n4 n5 Nand2
+XU5 n0 n0 n6 Nand2
+XU6 n1 n6 n7 Nand2
+XU7 n7 n7 n8 Nand2
+XU8 n5 n5 n9 Nand2
+XU9 nc n9 n10 Nand2
+XU10 n10 n10 n11 Nand2
+XU11 n8 n8 n12 Nand2
+XU12 n11 n11 n13 Nand2
+XU13 n12 n13 n14 Nand2
+* n14 = Borrow
+XU14 n5 nc n15 Nand2
+XU15 n5 n15 n16 Nand2
+XU16 nc n15 n17 Nand2
+XU17 n16 n17 n18 Nand2
+.CONTROL
+set color0 = white
+set color1 = black
+set color2 = red
+set color3 = blue
+set color4 = green
+set xbrushwidth = 7
+TRAN 0.01ms 100msPLOT V(n0) V(n1) +10 V(nc) + 20 V(n18) +30 V(n14) + 40
+.ENDC
+.END

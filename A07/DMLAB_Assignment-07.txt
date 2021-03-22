@@ -1,0 +1,4 @@
+Q1. Design & simulate CMOS Half Adder using Ngspice simulator.
+Q2. Design & simulate CMOS half subtractor using Ngspice simulator. 
+Q3. Design & simulate CMOS full adder using Ngspice simulator.
+Q4. Design & simulate CMOS full subtractor using Ngspice simulator.

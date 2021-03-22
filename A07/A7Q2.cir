@@ -1,0 +1,33 @@
+Half subtractor circuit
+vdd 5 0 dc 5v
+vin1 1 0 pulse (0v 5v 0ns 0ns 0ns 10ns 20ns)
+vin2 2 0 pulse (0v 5v 0ns 0ns 0ns 5ns 20ns)
+*mos1 = nmos
+*mos2 = pmos
+*not circuit for A
+m1 3 1 5 5 mos2 l=1u w=100u
+m2 3 1 0 0 mos1 l=1u w=40u
+*not circuit for B
+m11 7 2 5 5 mos2 l=1u w=100u
+m12 7 2 0 0 mos1 l=1u w=40u
+*diffenece circuit
+m3 4 1 5 5 mos2 l=1u w=100u
+m4 4 2 5 5 mos2 l=1u w=100u
+m5 D 3 4 4 mos2 l=1u w=100u
+m6 D 7 4 4 mos2 l=1u w=100u
+m7 D 1 6 6 mos1 l=1u w=40u
+m8 D 3 6 6 mos1 l=1u w=40u
+m9 6 2 0 0 mos1 l=1u w=40u
+m10 6 7 0 0 mos1 l=1u w=40u
+*borrow circuit
+m13 8 1 5 5 mos2 l=1u w=100u
+m14 B 7 8 8 mos2 l=1u w=100u
+m15 B 1 0 0 mos1 l=1u w=40u
+m16 B 7 0 0 mos1 l=1u w=40u
+.model mos1 nmos vto=1v kp=200u
+.model mos2 pmos vto=-1v kp=80u.tran 0.1ns 120ns
+.control
+run
+plot v(D) v(B)+10 v(1)+20 v(2)+30
+.endc
+.end

@@ -1,0 +1,34 @@
+Half adder using CMOS
+
+vdd 5 0 dc 5v
+vin1 1 0 pulse (0v 5v 0ns 0ns 0ns 10ns 20ns)
+vin2 2 0 pulse (0v 5v 0ns 0ns 0ns 5ns 20ns)
+*mos1 = nmos & mos2 = pmos
+*not circuit for A
+m13 8 1 5 5 mos2 l=1u w=100u
+m14 8 1 0 0 mos1 l=1u w=40u
+*not circuit for B
+m15 10 2 5 5 mos2 l=1u w=100u
+m16 10 2 0 0 mos1 l=1u w=40u
+*sum circuit
+m1 3 8 5 5 mos2 l=1u w=100u
+m2 3 10 5 5 mos2 l=1u w=100u
+m3 sum 1 3 3 mos2 l=1u w=100u
+m4 sum 2 3 3 mos2 l=1u w=100u
+m5 sum 8 6 6 mos1 l=1u w=40u
+m6 6 10 0 0 mos1 l=1u w=40u
+m7 sum 1 7 7 mos1 l=1u w=40u
+m8 7 2 0 0 mos1 l=1u w=40u
+*carry circuit
+m9 9 8 5 5 mos2 l=1u w=100u
+m10 carry 10 9 9 mos2 l=1u w=100u
+m11 carry 1 0 0 mos1 l=1u w=40u
+m12 carry 2 0 0 mos1 l=1u w=40u
+.model mos1 nmos vto=1v kp=200u
+.model mos2 pmos vto=-1v kp=80u
+.tran 0.1ns 120ns
+.control
+run
+plot v(sum) v(carry)+10 v(1)+20 v(2)+30
+.endc
+.end
