@@ -1,0 +1,6 @@
+Q2.
+
+V1 1 0 pulse(0 5 0 0 0 10ms 20ms)
+V2 2 0 pulse(0 5 0 0 0 20ms 40ms)
+V3 3 0 pulse(0 5 0 0 0 40ms 80ms)
+

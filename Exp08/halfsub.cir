@@ -1,0 +1,32 @@
+Half subtractor
+
+VA A 0 PULSE(0 5 0 0 0 1.1ms 2.2ms)
+VB B 0 PULSE(0 5 0 0 0 1.3ms 2.6ms)
+VDC Vdd 0 5V
+
+.subckt nor1 Vdd A B out
+M1 Vdd A n1 0 pfet
+M2 n1 B out 0 pfet
+M3 out B 0 0 nfet
+M4 out A 0 0 nfet
+*R1 out 0 1K
+.model nfet NMOS
+.model pfet PMOS
+.ends
+
+X1 Vdd A B out1 nor1
+X2 Vdd A out1 borrow nor1
+X3 Vdd B out1 out2 nor1
+X4 Vdd borrow out2 out3 nor1
+X5 Vdd out3 out3 out nor1
+
+.tran 1us 10ms
+.control
+run
+set color0 = white
+set color1 = black
+set Xbrushwidth = 2
+plot v(A) V(B)+7 v(out)*5+14 v(borrow)*5+21
+
+.endc
+.end

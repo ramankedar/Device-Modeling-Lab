@@ -1,0 +1,119 @@
+4-bit adder using 1-bit adder
+
+va1 a1 0 PULSE(0 4.5 0 0 0 5m 10m)
+vb1 b1 0 PULSE(0 4.5 0 0 0 10m 20m)
+va2 a2 0 PULSE(0 4.5 5m 0 0 5m 10m)
+vb2 b2 0 PULSE(0 4.5 5m 0 0 10m 20m)
+va3 a3 0 PULSE(0 4.5 10m 0 0 5m 10m)
+vb3 b3 0 PULSE(0 4.5 10m 0 0 10m 20m)
+va4 a4 0 PULSE(0 4.5 15m 0 0 5m 10m)
+vb4 b4 0 PULSE(0 4.5 15m 0 0 10m 20m)
+
+* vc cin 0 PULSE(0 5 0 0 0 20m 40m)
+.subckt not 1 2
+v1 3 0 4.5
+m1 3 1 2 3 PFET
+m3 2 1 0 0 NFET
+.model PFET PMOS
+.model NFET NMOS
+.ends
+
+.subckt fullAdd a b cin sum cout
+Xu1 a nota not
+Xu2 b notb not
+Xu3 cin notcin not
+vdd vd 0 4.5
+
+mp1 vd a n1 vd PFET
+mp2 n1 b n2 vd PFET
+mp3 n2 cin invsum vd PFET
+
+mp4 vd a n3 vd PFET
+mp5 n3 notb n4 vd PFET
+mp6 n4 notcin invsum vd PFET
+
+mp7 vd nota n5 vd PFET
+mp8 n5 b n6 vd PFET
+mp9 n6 notcin invsum vd PFET
+
+mp10 vd nota n7 vd PFET
+mp11 n7 notb n8 vd PFET
+mp12 n8 cin invsum vd PFET
+
+mn1 invsum nota n9 0 NFET
+mn2 n9 notb n10 0 NFET
+mn3 n10 cin 0 0 NFET
+
+mn4 invsum a n11 0 NFET
+mn5 n11 b n12 0 NFET
+mn6 n12 cin 0 0 NFET
+
+mn7 invsum a n13 0 NFET
+mn8 n13 notb n14 0 NFET
+mn9 n14 notcin 0 0 NFET
+
+mn10 invsum nota n15 0 NFET
+mn11 n15 b n16 0 NFET
+mn12 n16 notcin 0 0 NFET
+
+Xu4 invsum sum not
+mp13 vd a nc1 vd PFET
+mp14 nc1 b nc2 vd PFET
+mp15 nc2 cin invcout vd PFET
+
+mp16 vd a nc3 vd PFET
+mp17 nc3 b nc4 vd PFET
+mp18 nc4 notcin invcout vd PFET
+
+mp19 vd a nc5 vd PFET
+mp20 nc5 notb nc6 vd PFET
+mp21 nc6 cin invcout vd PFET
+
+mp22 vd nota nc7 vd PFET
+mp23 nc7 b nc8 vd PFET
+mp24 nc8 cin invcout vd PFET
+
+mn13 invcout a nc9 0 NFET
+mn14 nc9 b nc10 0 NFET
+mn15 nc10 cin 0 0 NFET
+
+mn16 invcout a nc11 0 NFET
+mn17 nc11 b nc12 0 NFET
+mn18 nc12 notcin 0 0 NFET
+
+mn19 invcout a nc13 0 NFET
+mn20 nc13 notb nc14 0 NFET
+mn21 nc14 cin 0 0 NFET
+
+mn22 invcout nota nc15 0 NFET
+mn23 nc15 b nc16 0 NFET
+mn24 nc16 cin 0 0 NFET
+
+Xu5 invcout cout not
+
+.model PFET PMOS
+.model NFET NMOS
+.ends
+
+x1 a1 b1 0 sum1 cout1 fullAdd
+x2 a2 b2 cout1 sum2 cout2 fullAdd
+x3 a3 b3 cout2 sum3 cout3 fullAdd
+x4 a4 b4 cout3 sum4 cout4 fullAdd
+
+.tran 1u 40m 20m 
+.control
+run
+
+set color0=black
+set color1=white
+set color2=red
+set color3=blue
+set color4=green
+
+plot v(a1) v(b1)+5 v(a1)-v(a1)+10 v(sum1)+15 v(cout1)+20
+plot v(a2) v(b2)+5 v(cout1)+10 v(sum2)+15 v(cout2)+20 
+plot v(a3) v(b3)+5 v(cout2)+10 v(sum3)+15 v(cout3)+20 
+plot v(a4) v(b4)+5 v(cout3)+10 v(sum4)+15 v(cout4)+20 
+
+.endc
+.end
