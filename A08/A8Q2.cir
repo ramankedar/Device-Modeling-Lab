@@ -1,0 +1,21 @@
+And-Or Inverter
+
+V1 a 0 Pulse(0 5 0 0 0 10ms 20ms)
+V2 b 0 Pulse(0 5 0 0 0 20ms 40ms)
+V3 c 0 Pulse(0 5 0 0 0 40ms 80ms)
+.include cmos.lib
+X1 a b s1 AND_gate
+X2 s1 c s2 OR_gate
+X3 s2 y NOT_gate
+.control
+tran 0.01m 80ms
+set color0 = white
+set color1 = black
+set color2 = red
+set color3 = green
+set color4 = blue
+set color5 = brown
+set xbrushwidth = 2
+plot V(a)+18 V(b)+12 V(c)+6 V(y)
+.endc
+.end

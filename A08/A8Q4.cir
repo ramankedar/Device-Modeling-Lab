@@ -1,0 +1,51 @@
+AOI22
+
+va a 0 PULSE(0 5 0 0 0 5m 10m)
+vb b 0 PULSE(0 5 0 0 0 10m 20m)
+vc c 0 PULSE(0 5 0 0 0 20m 40m)
+vd d 0 PULSE(0 5 0 0 0 40m 80m)
+
+.subckt not 1 2
+
+v1 3 0 5
+m1 3 1 2 3 PFET
+m3 2 1 0 0 NFET
+
+.model PFET PMOS
+.model NFET NMOS
+.ends
+
+.subckt AOI22 a b c d out
+
+vdd vd 0 5
+
+mp1 vd a n1 vd PFET
+mp2 vd b n1 vd PFET
+mp3 n1 c out vd PFET
+mp4 n1 d out vd PFET
+
+mn1 out a n2 0 NFET
+mn2 n2 b 0 0 NFET
+mn3 out c n3 0 NFET
+mn4 n3 d 0 0 NFET
+
+.model PFET PMOS
+.model NFET NMOS
+.ends
+
+Xu1 a b c d out AOI22
+
+.tran 1u 80m
+.control
+run
+
+set color0=black
+set color1=white
+set color2=red
+set color3=blue
+set color4=green
+
+plot v(a) v(b)+5 v(c)+10 v(d)+15 v(out)+20
+
+.endc
+.end
