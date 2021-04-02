@@ -1,0 +1,30 @@
+D flip flop neg level triggered
+
+.SUBCKT nandgate in1 in2 out VDD
+M1 out in2 Vdd Vdd p1 W=7.5u L=0.35u pd=13.5u ad=22.5p ps=13.5u as=22.5p
+M2 net.1 in2 0 0 n1   W=3u   L=0.35u pd=9u    ad=9p    ps=9u    as=9p
+M3 out in1 Vdd Vdd p1 W=7.5u L=0.35u pd=13.5u ad=22.5p ps=13.5u as=22.5p
+M4 out in1 net.1 0 n1 W=3u   L=0.35u pd=9u    ad=9p    ps=9u    as=9p
+.ENDS nandgate
+.model n1 nmos level=49 version=3.3.0
+.model p1 pmos level=49 version=3.3.0
+
+vdd 1 0 dc 5
+vdin 2 0 PULSE(0 5 0 0 0 5ms 9ms)
+vclk 9 0 PULSE(0 5 0 0 0 5ms 10ms)
+
+x6 9 9 3 1 nandgate
+x1 2 3 4 1 nandgate
+x2 2 2 5 1 nandgate
+x3 5 3 6 1 nandgate
+x4 4 8 7 1 nandgate
+x5 7 6 8 1 nandgate
+
+.CONTROL
+set color0=white
+set xbrushwidth=3
+TRAN 0.01ms 40ms
+plot v(2)+20 v(9)+10 v(7)
+
+.ENDC
+.END
